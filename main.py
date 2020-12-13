@@ -6,7 +6,7 @@ import analyze_unsupervised
 import os
 
 path = os.getcwd()
-traverse(path)
+preprocess.traverse(path)
 labeled_images = preprocess.load_preprocessed(path + "/Processed") 
 
 
