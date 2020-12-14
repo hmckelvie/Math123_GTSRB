@@ -30,7 +30,7 @@ def analyze_labels(labeled_images, gmm_labels, kmeans_labels):
         assigned_gmm.to_csv(('gmm_cluster/gmm_cluster_%d.csv'%(i)), index=False)
         assigned_kmeans.to_csv(('kmeans_cluster/kmeans_cluster_%d.csv'%(i)), index=False)
 
-        curr_vote = get_votes(curr_label)
+        curr_vote = get_votes(curr_label, i)
         voted_label = voted_label.append(curr_vote, ignore_index=True)
         
     voted_label.to_csv('voted_label_per_method.csv', index=False)
@@ -41,7 +41,7 @@ param: curr_label, the assignments for each actual label in the dataset
 returns: none
 computes the majority voted label from each method for the respective sign
 '''
-def get_votes(curr_label):
+def get_votes(curr_label, i):
     gmm_vote = curr_label['gmm_label'].mode()
     gmm_vote = gmm_vote.to_numpy()
 
