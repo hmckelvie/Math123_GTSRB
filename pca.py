@@ -6,12 +6,12 @@ NUM_COMPONENTS= 50
 
 '''
 pca_features
-param: none
+param: file containing features
 returns: the features array with 50 components 
 computes PCA with 50 componenets for the data in the features array
 '''
-def pca_features():
-    with open(FEATURES_FILE, 'rb') as file:
+def pca_features(file_name):
+    with open(file_name, 'rb') as file:
         img_features = np.load(file)
         scaler = StandardScaler()    
         scaler.fit(img_features)
