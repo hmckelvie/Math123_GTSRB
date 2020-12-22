@@ -7,6 +7,11 @@ import pandas as pd
 
 IMG_SIZE = 48
 FEATURES_FILE = 'preprocessed_features.np'
+CLUSTERS = np.array([0,0,0,0,0,0,6,0,0,1,
+                        1,2,4,2,5,1,1,5,2,2,
+                        2,2,2,2,2,2,2,2,2,2,
+                        2,2,6,3,3,3,3,3,3,3,
+                        3,6,6])
 
 '''
 traverse
@@ -18,9 +23,9 @@ def traverse(path):
     direct = os.listdir(path+"/Train")
     for d in direct:
         dir_path = path+"/Processed/"+ d
-        images = os.listdir(path+"/Train/"+ d)
         if not os.path.isdir(dir_path):
             os.mkdir(dir_path) 
+        images = os.listdir(path+"/Train/"+ d)
         for i in images :  
             img_path = dir_path +"/" + i
             src_path = path+"/Train/"+ d +"/" + i
@@ -56,11 +61,11 @@ creates the features array and saves to file and returns a dataframe of the expe
 def load_preprocessed(path, file_name):
     features = []
     dirs = os.listdir(path)
-    labeled_images = pd.DataFrame(columns=['path', 'expected_label'])
+    labeled_images = pd.DataFrame(columns=['sign_id'])
     for d in dirs:
         images = os.listdir(path+"/"+d)
         for img in images:
-            curr_img = pd.DataFrame({'path': [path + "/" + d + "/"+ img], 'expected_label': [int(d)]})
+            curr_img = pd.DataFrame({'sign_id': [int(d)], 'expected_cluster': [CLUSTERS[int(d)]]}) #'path': [path + "/" + d + "/"+ img],
             labeled_images = labeled_images.append(curr_img, ignore_index=True)
             img = io.imread(path + "/" + d + "/"+ img)
             features.append(img.flatten())
