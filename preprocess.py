@@ -53,7 +53,7 @@ param: path, the base path
 returns: the labeled images where the labels are given from the input data, saves the features array to a file
 creates the features array and saves to file and returns a dataframe of the expected labels for the output
 '''
-def load_preprocessed(path):
+def load_preprocessed(path, file_name):
     features = []
     dirs = os.listdir(path)
     labeled_images = pd.DataFrame(columns=['path', 'expected_label'])
@@ -65,7 +65,7 @@ def load_preprocessed(path):
             img = io.imread(path + "/" + d + "/"+ img)
             features.append(img.flatten())
     arr_features = np.array(features)
-    with open(FEATURES_FILE, 'wb') as file:
+    with open(file_name, 'wb') as file:
         np.save(file, arr_features)
     return labeled_images
 
