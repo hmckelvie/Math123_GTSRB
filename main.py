@@ -2,7 +2,8 @@ import preprocess
 import pca
 import gmm
 import kmeans
-import analyze_unsupervised
+import accuracy_rate
+import analyze_labels
 import os
 
 path = os.getcwd()
