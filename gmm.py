@@ -3,7 +3,7 @@ import os
 from sklearn.mixture import GaussianMixture
 from sklearn.metrics import silhouette_score
 
-NUM_CLUSTER = 43 #there are 43 types of signs
+NUM_CLUSTER = 7 #there are seven classes of signs
 
 '''
 gmm
